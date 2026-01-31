@@ -3,4 +3,6 @@ project(Ezy_OS C)
 
 set(CMAKE_C_STANDARD 23)
 
-add_executable(Ezy_OS main.c)
+add_executable(Ezy_OS main.c
+        file/workfiles.c
+        INIT.h)
