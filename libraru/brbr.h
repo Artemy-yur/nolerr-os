@@ -71,3 +71,4 @@ void print_arry(int arry[], int N)
         printf("%3d ", arry[i]);
     }
 }
+

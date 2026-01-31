@@ -11,13 +11,16 @@ void deletefile(const char *name);
 void copyfile(const char *from, const char *to);
 
 
-void createfile(const char *name) {
-    FILE *f = fopen(name, "w");
-    if (f != NULL) {
-        perror("error creat file");
-        fclose(f);
+void creatfile(const char *name) {
+    FILE *file = fopen(name, "w");
+    if (file != NULL) {
+        printf("File %s created successfully\n", name);
+        fclose(file);
+    } else {
+        perror("Error creating file");
     }
 }
+
 void readfile(const char *name) {
     FILE *file = fopen(name, "r");
     if (file != NULL) {
