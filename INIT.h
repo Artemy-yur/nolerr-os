@@ -1,3 +1,7 @@
+/*
+ * Nolerr-OS - Copyright (c) 2025 Артемий Юров
+ * Лицензия MIT: свободное использование с сохранением авторства
+ */
 #pragma once
 
 void creatfile(const char *name);

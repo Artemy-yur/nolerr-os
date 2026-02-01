@@ -1,4 +1,7 @@
-
+/*
+ * Nolerr-OS - Copyright (c) 2025 Артемий Юров
+ * Лицензия MIT: свободное использование с сохранением авторства
+ */
 #ifdef APPLE
 #define SLEEP(x) sleep(x)
 #define CLEAR system("clear");

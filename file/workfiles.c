@@ -1,6 +1,7 @@
-//
-// Created by Artemy on 31.01.2026.
-//
+/*
+ * Nolerr-OS - Copyright (c) 2025 Артемий Юров
+ * Лицензия MIT: свободное использование с сохранением авторства
+ */
 #include <stdlib.h>
 #include <stdio.h>
 

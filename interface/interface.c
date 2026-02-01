@@ -1,3 +1,8 @@
+/*
+ * Nolerr-OS - Copyright (c) 2025 Артемий Юров
+ * Лицензия MIT: свободное использование с сохранением авторства
+ */
+
 #include "../libraru/initlibery.h"
 #include "clearwin.h"
 #include <stdbool.h>

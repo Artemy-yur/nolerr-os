@@ -1,3 +1,9 @@
+/*
+ * Nolerr-OS - Copyright (c) 2025 Артемий Юров
+ * Лицензия MIT: свободное использование с сохранением авторства
+ */
+
+
 #ifdef _WIN32
 #include <winsock2.h>
 #include <ws2tcpip.h>
