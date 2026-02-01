@@ -5,75 +5,141 @@
 
 #include "../libraru/initlibery.h"
 
+#include "../clearwin.h"
+#include "../INIT.h"
+
 static void power(void);
 static void sqtr(void);
 static void math_actions(void);
 
-void actions(){
-    unsigned short v;
-    printf("Выберите действия из:\n1.Корень числа.\n2.Возведения в степень.\n3.Простой калькулятор.\n");
-    scanf("%hu", &v);
-    switch (v) {
-        case 1:
-            sqtr();
-            break;
-        case 2:
-            power();
-            break;
-        case 3:
-            math_actions();
-            break;
+void actions(void) {
+    short v;
+
+    while (1) {
+        CLEAR;
+        printf("Выберите действие:\n1. Корень\n2. Степень\n3. Калькулятор\n4. Назад\nВаш выбор: ");
+
+        int res = scanf("%hd", &v);
+
+
+        while (getchar() != '\n');
+
+        if (res != 1) {
+            printf("Ошибка! Введите число.\n");
+            SLEEP(1); // Даем пользователю секунду прочитать ошибку
+            continue;
+        }
+
+        switch (v) {
+            case 1: sqtr(); break;
+            case 2: power(); break;
+            case 3: math_actions(); break;
+            case 4:
+                CLEAR;
+                system("cls");
+                start();
+                return;
+            default:
+                printf("Такого пункта нет!\n");
+                SLEEP(1);
+        }
     }
 }
 
+
+static void sqtr(void) {
+    double number, result;
+
+    printf("Введите число для вычисления квадратного корня: ");
+
+    if (scanf("%lf", &number) != 1) {
+        printf("Ошибка ввода!\n");
+        while(getchar() != '\n');
+        SLEEP(2);
+        return;
+    }
+
+    if (number < 0) {
+        printf("Ошибка: нельзя извлечь корень из отрицательного числа!\n");
+        SLEEP(10);
+        return;
+    }
+
+    result = sqrt(number);
+    printf("√%.2lf = %.4lf\n", number, result);
+    SLEEP(10);
+}
+
 static void power(void) {
-    int num1, num2;
-    long result;
+    double base, exponent, result;
 
-    printf("Please input two num:");
-    scanf("%d %d", &num1, &num2);
-    result = pow(num1, num2);
-    printf("Result = %ld\n", result);
+    printf("Введите основание и степень: ");
 
+    if (scanf("%lf %lf", &base, &exponent) != 2) {
+        printf("Неверный ввод!\n");
+        while(getchar() != '\n');
+        SLEEP(10);
+        return;
+    }
+
+    
+    if (base == 0 && exponent <= 0) {
+        printf("0^0 или 0^(отрицательное) не определено!\n");
+        SLEEP(10);
+        return;
+    }
+
+    if (base < 0 && fmod(exponent, 1.0) != 0.0) {
+        printf("Осторожно: извлечение корня из отрицательного числа!\n");
+    }
+
+    // Вычисление степени
+    result = pow(base, exponent);
+
+ 
+    printf("%g ^ %g = ", base, exponent);
+
+ 
+    if (exponent >= 0 && result == floor(result) && result <= 1e6) {
+        printf("%.0lf\n", result);
+    } else if (fabs(result) < 1e-4 || fabs(result) > 1e6) {
+        printf("%.6e\n", result);
+    } else {
+        printf("%.6lf\n", result);
+    }
+    SLEEP(10);
 }
 
-static void sqtr(void){
-    unsigned long num;
-    scanf("%ld",&num);
-    unsigned short bb;
-    bb = sqrt(num);
-    printf("%hd",bb);
-}
 
 static void math_actions(void) {
     int num1, num2;
     char action;
 
-    // Ввод чисел
     printf("Enter num1: ");
     scanf("%d", &num1);
     printf("Enter num2: ");
     scanf("%d", &num2);
 
-    // Очистка буфера ввода
     while (getchar() != '\n');
 
-    // Ввод операции
     printf("Enter action (+, -, *, /): ");
     scanf("%c", &action);
 
-    // Вычисления
+
     printf("%d %c %d = ", num1, action, num2);
 
     switch (action) {
         case '+':
             printf("%d\n", num1 + num2);
+            SLEEP(10);
             break;
         case '-':
             printf("%d\n", num1 - num2);
+            SLEEP(10);
             break;
         case '*':
             printf("%d\n", num1 * num2);
+            SLEEP(10);
             break;
         case '/':
             if (num2 != 0) {
@@ -84,6 +150,7 @@ static void math_actions(void) {
             } else {
                 printf("Error: Division by zero!\n");
             }
+            SLEEP(10);
             break;
         default:
             printf("Error: Invalid operation!\n");

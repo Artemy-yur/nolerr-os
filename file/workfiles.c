@@ -61,13 +61,13 @@ void deletefile(const char *name) {
 }
 
 void copyfile(const char *from, const char *to) {
-    FILE *file = fopen(from, "rb");  // Use "rb" for binary mode
-    if (file == NULL) {  // Error condition is reversed!
+    FILE *file = fopen(from, "rb"); 
+    if (file == NULL) {  
         perror("Error opening source file");
         return;
     }
     
-    FILE *file2 = fopen(to, "wb");  // Use "wb" for binary mode
+    FILE *file2 = fopen(to, "wb");  
     if (file2 == NULL) {
         perror("Error opening destination file");
         fclose(file);
@@ -80,7 +80,7 @@ void copyfile(const char *from, const char *to) {
     long length = ftell(file);
     fseek(file, 0, SEEK_SET);
     
-    // Check if file is empty
+ 
     if (length == 0) {
         fclose(file);
         fclose(file2);
@@ -95,7 +95,6 @@ void copyfile(const char *from, const char *to) {
         return;
     }
 
-    // Read the file
     size_t bytes_read = fread(buffer, 1, length, file);
     if (bytes_read != length) {
         perror("Error reading file");
@@ -106,7 +105,6 @@ void copyfile(const char *from, const char *to) {
     }
     fclose(file);
 
-    // Write the file
     size_t bytes_written = fwrite(buffer, 1, length, file2);
     if (bytes_written != length) {
         perror("Error writing file");

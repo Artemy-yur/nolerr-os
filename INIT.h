@@ -16,3 +16,7 @@ void times(void);
 
 //wearth
 void get_weather_win(const char *city);
+
+//interface
+int start(void);
+void python_help(void);
