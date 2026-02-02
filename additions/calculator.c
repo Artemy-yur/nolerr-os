@@ -9,8 +9,6 @@
 #include "../clearwin.h"
 #include "../INIT.h"
 
-static void power(void);
-static void sqtr(void);
 static void math_actions(void);
 
 void actions(void) {

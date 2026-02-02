@@ -24,7 +24,7 @@ void times(void)
         time_t mytime = time(NULL);
         struct tm *now = localtime(&mytime);
         
-        system("cls");
+        CLEAR;
         printf("Date: %02d.%02d.%d\n", now->tm_mday, now->tm_mon + 1, now->tm_year + 1900);
         printf("Time: %02d:%02d:%02d\n", now->tm_hour, now->tm_min, now->tm_sec);
         

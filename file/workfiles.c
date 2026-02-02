@@ -2,15 +2,16 @@
  * Nolerr-OS - Copyright (c) 2025 Артемий Юров
  * Лицензия MIT: свободное использование с сохранением авторства
  */
-#include <stdlib.h>
-#include <stdio.h>
+#include "../clearwin.h"
+#include "../libraru/initlibery.h"
+#include <dirent.h>
 
 void creatfile(const char *name);
 void readfile(const char *name);
 void writefile(const char *name);
 void deletefile(const char *name);
 void copyfile(const char *from, const char *to);
-
+void listfile(void);
 
 void creatfile(const char *name) {
     FILE *file = fopen(name, "w");
@@ -113,4 +114,22 @@ void copyfile(const char *from, const char *to) {
 
     free(buffer);
     fclose(file2);
+}
+
+void listfile(void) {
+    DIR *listdir = opendir(".");
+    if (listdir == NULL) {
+        perror("Error in opendir()");
+        return;
+    }
+
+    int i = 0;
+    struct dirent *filelist;
+
+    while ((filelist = readdir(listdir)) != NULL) {
+            printf("%d - [FILE] %s\n", i, filelist->d_name);
+        i++;
+    }
+
+    closedir(listdir);
 }

@@ -29,6 +29,12 @@ int main(void)
         case 5:
             python_help();
             break;
+        case 6:
+            notich();
+            break;
+        case 7:
+            listfile();
+            break;
         default:
             printf("Не известное действия!");
             CLEAR;

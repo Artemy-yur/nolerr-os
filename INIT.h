@@ -9,6 +9,7 @@ void readfile(const char *name);
 void writefile(const char *name);
 void deletefile(const char *name);
 void copyfile(const char *from, const char *to);
+void listfile(void);
 
 //calculator
 static void power(void);
@@ -24,3 +25,6 @@ void get_weather_win(const char *city);
 //interface
 int start(void);
 void python_help(void);
+
+
+void notich(void);

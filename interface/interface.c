@@ -4,7 +4,7 @@
  */
 
 #include "../libraru/initlibery.h"
-#include "clearwin.h"
+#include "../clearwin.h"
 #include <stdbool.h>
 #include <string.h>
 #define LEN_ARR(arr) sizeof(arr) / sizeof(*arr)
@@ -23,7 +23,9 @@ static int mainmeny_ru(void)
       "2. Математика.\n",
       "3. Время сейчас.\n",
       "4. Погода.\n"
-      "5. Help\n"};
+      "5. Help\n"
+      "6. Заметка\n"
+      "7. Все файлы в директории\n"};
   for (size_t i = 0; i < 3; i++)
   {
     printf("%s", tegs[i]);
@@ -38,7 +40,7 @@ static int mainmeny_ru(void)
   }
 
   while(1) {
-    printf("Введите число от (1-5): ");
+    printf("Введите число от (1-7): ");
 
     if(scanf("%hd", &vibor_s) != 1) {
     
@@ -47,8 +49,8 @@ static int mainmeny_ru(void)
       continue;
     }
 
-    if(vibor_s > 5 || vibor_s < 1){
-      printf("Error: Чило от 1 до 5\n");
+    if(vibor_s > 6 || vibor_s < 1){
+      printf("Error: Чило от 1 до 7\n");
     }
     else {
       break;
@@ -89,7 +91,7 @@ static int mainmeny_en(void) {
 
   while(1) {
 
-    printf("Enter choice (1-4): ");
+    printf("Enter choice (1-6): ");
 
     if(scanf("%hd", &vibor_s) != 1) {
       while(getchar() != '\n');
@@ -97,7 +99,7 @@ static int mainmeny_en(void) {
       continue;
     }
 
-    if(vibor_s > 5 || vibor_s < 1){
+    if(vibor_s > 6 || vibor_s < 1){
       printf("Error: Number must be between 1 and 5\n");
     }
     else {
@@ -117,28 +119,30 @@ int start(void)
     return 1;
   }
 
-  printf("Your language (ru/en)?: ");
+  //printf("Your language (ru/en)?: ");
 
+  // Временное решение: всегда вызываем RU версию
+  scanf("%9s", lengch);
+  int res = mainmeny_ru();
+
+
+  free(lengch);
+  return res;
+
+#if 0
   while (1) {
-    scanf("%9s", lengch);
-
     if (strcmp(lengch, "ru") == 0) {
       free(lengch);
       int res = mainmeny_ru();
-      return res;
+
+      return mainmeny_ru();
     }
-    else if (strcmp(lengch, "en") == 0) {
+    if (strcmp(lengch, "en") == 0) {
       free(lengch);
       int res = mainmeny_en();
-      return res;
-    }
-    else {
-      printf("Invalid language. Please enter 'ru' or 'en': ");
+
+      return mainmeny_en();
     }
   }
-
-
-  // Сюда код никогда не дойдет, но для безопасности:
-  free(lengch);
-  return 0;
+#endif
 }
