@@ -15,6 +15,7 @@ void listfile(void);
 static void power(void);
 static void sqtr(void);
 static void match_actions(void);
+void actions(void);
 
 //time
 void times(void);

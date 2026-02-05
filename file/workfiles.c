@@ -12,6 +12,7 @@ void writefile(const char *name);
 void deletefile(const char *name);
 void copyfile(const char *from, const char *to);
 void listfile(void);
+int starts(void);
 
 void creatfile(const char *name) {
     FILE *file = fopen(name, "w");
@@ -130,7 +131,22 @@ void listfile(void) {
             printf("%d - [FILE] %s\n", i, filelist->d_name);
         i++;
     }
+    printf("\n");
+    printf("\n");
 
-    closedir(listdir);
-    SLEEP(10);
+    short v;
+
+    printf("Press 0 to exit: ");
+
+    while (TRUE) {
+        scanf("%hd", &v);
+        while (getchar() != '\n');
+        if (v == 0) {
+            closedir(listdir);
+            starts();
+        }
+    }
+
+
+
 }
