@@ -4,11 +4,11 @@
  */
 #pragma once
 
-void creatfile(const char *name);
-void readfile(const char *name);
-void writefile(const char *name);
-void deletefile(const char *name);
-void copyfile(const char *from, const char *to);
+static void creatfile(const char *name);
+static void readfile(const char *name);
+static void writefile(const char *name);
+static void deletefile(const char *name);
+static void copyfile(const char *from, const char *to);
 void listfile(void);
 
 //calculator
@@ -27,7 +27,14 @@ void get_weather_win(const char *city);
 int start(void);
 void python_help(void);
 int starts(void);
+void menu_file(void);
 
 void notich(void);
 
 void info_system(void);
+
+#define F_BLUE    "\033[1;34m" // Основной синий Fedora
+#define F_CYAN    "\033[1;36m" // Светло-голубой
+#define F_WHITE   "\033[1;37m" // Жирный белый
+#define F_BOLD    "\033[1m"    // Просто жирный
+#define RESET     "\033[0m"

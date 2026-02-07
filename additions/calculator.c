@@ -35,7 +35,6 @@ void actions(void) {
             case 3: math_actions(); break;
             case 4:
                 CLEAR;
-                system("cls");
                 starts();
                 return;
             default:

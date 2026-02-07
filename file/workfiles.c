@@ -2,23 +2,87 @@
  * Nolerr-OS - Copyright (c) 2025 Артемий Юров
  * Лицензия MIT: свободное использование с сохранением авторства
  */
+#include <conio.h>
 #include "../clearwin.h"
 #include "../libraru/initlibery.h"
 #include <dirent.h>
+#include "../INIT.h"
 
-void creatfile(const char *name);
-void readfile(const char *name);
-void writefile(const char *name);
-void deletefile(const char *name);
-void copyfile(const char *from, const char *to);
-void listfile(void);
-int starts(void);
+
+
+void menu_file(void) {
+    printf("1. Создать файл\n2. Прочитать содержимое\n3. Внести текст в файл\n4. Удалить файл\n5. Копировать файл\n6. Выход в меню\n");
+
+    short v;
+    while(1) {
+        printf(F_BOLD "  user@nolerr" RESET ":" F_BLUE "~" RESET "$ ");
+
+        if(scanf("%hd", &v) != 1) {
+            while(getchar() != '\n');
+            printf(F_CYAN "  [!] Ошибка: введите число" RESET "\n");
+            continue;
+        }
+
+        if(v > 6 || v < 1) {
+            printf(F_CYAN "  [!] Число должно быть от 1 до 6" RESET "\n");
+        }
+        else {
+            break;
+        }
+    }
+
+    switch (v) {
+        case 1: {
+            char name[20];
+            printf("Enter your namefile: ");
+            scanf("%s", name);
+            creatfile(name);
+            break;
+        }
+        case 2: {
+            char name[20];
+            printf("Enter your namefile: ");
+            scanf("%s", name);
+            readfile(name);
+            break;
+        }
+        case 3: {
+            char name[20];
+            printf("Enter your namefile: ");
+            scanf("%s", name);
+            writefile(name);
+        }
+        case 4: {
+            char name[20];
+            printf("Enter your namefile: ");
+            scanf("%s", name);
+            deletefile(name);
+        }
+        case 5: {
+            char name1[20], name2[20];
+            printf("Enter your namefile 1 and file 2: ");
+            scanf("%s %s", name1,name2);
+            copyfile(name1, name2);
+        }
+        case 6: {
+            CLEAR;
+            starts();
+            return;
+        }
+        default: {
+            printf("Error");
+        }
+    }
+
+}
 
 void creatfile(const char *name) {
     FILE *file = fopen(name, "w");
     if (file != NULL) {
         printf("File %s created successfully\n", name);
         fclose(file);
+        CLEAR;
+        menu_file();
     } else {
         perror("Error creating file");
     }
@@ -35,22 +99,49 @@ void readfile(const char *name) {
     }
 
     fclose(file);
-}
-void writefile(const char *name) {
-    FILE *file = fopen(name, "w");
-    if (file != NULL) {
-        perror("error write");
-        fclose(file);
+    short v;
+
+    printf("Press 0 to exit: ");
+
+    while (TRUE) {
+        scanf("%hd", &v);
+        while (getchar() != '\n');
+        if (v == 0) {
+            CLEAR;
+            menu_file();
+        }
     }
 
-    int write_element = 0;
-    char *buffer = malloc(10000 * sizeof(char));
-    printf("Write text: ");
-    scanf("%s", buffer);
-    sprintf(buffer, "%d", write_element);
+}
+void writefile(const char *name) {
+    FILE *file = fopen(name, "a");
+    if (file == NULL) {
+        perror("Error opening file");
+        return;
+    }
+
+    printf("Write text (press Enter twice to finish):\n");
+
+    char buffer[1000];
+    while (getchar() != '\n');
+
+
+    if (fgets(buffer, sizeof(buffer), stdin) != NULL) {
+        // Убираем символ новой строки в конце
+        size_t len = strlen(buffer);
+        if (len > 0 && buffer[len-1] == '\n') {
+            buffer[len-1] = '\0';
+        }
+
+        // Записываем в файл
+        fprintf(file, "%s\n", buffer);
+        printf("Text written to file %s\n", name);
+    }
 
     fclose(file);
-    free(buffer);
+    SLEEP(1);
+    CLEAR;
+    menu_file();
 }
 
 void deletefile(const char *name) {
@@ -60,7 +151,9 @@ void deletefile(const char *name) {
     else {
         perror("error delete");
     }
-    return;
+    SLEEP(3);
+    CLEAR;
+    menu_file();
 }
 
 void copyfile(const char *from, const char *to) {
@@ -115,6 +208,18 @@ void copyfile(const char *from, const char *to) {
 
     free(buffer);
     fclose(file2);
+    short v;
+
+    printf("Press 0 to exit: ");
+
+    while (TRUE) {
+        scanf("%hd", &v);
+        while (getchar() != '\n');
+        if (v == 0) {
+            CLEAR;
+            menu_file();
+        }
+    }
 }
 
 void listfile(void) {
@@ -146,7 +251,4 @@ void listfile(void) {
             starts();
         }
     }
-
-
-
 }

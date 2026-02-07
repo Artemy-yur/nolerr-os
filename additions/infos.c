@@ -38,20 +38,40 @@ typedef struct {
 } date;
 
 void info_system(void) {
-    date now = {"04.02.2026", "Version 0.2"};
-    printf("Last update: %s\nVersion: %s\n", now.last_update, now.version);
+    CLEAR;
+    date now = {"03.02.2026", "Version 0.3"};
+
+    printf(F_BLUE "       \n");
+    printf(F_BLUE "       " F_WHITE "Nolerr-OS " F_BLUE "\n");
+    printf(F_BLUE "      \n" RESET);
+
+    printf("\n" F_WHITE "--- СИСТЕМНАЯ ИНФОРМАЦИЯ ---\n" RESET);
+    printf(F_BLUE "OS: " RESET "Nolerr-OS\n");
+    printf(F_BLUE "Версия: " RESET "%s\n", now.version);
+    printf(F_BLUE "Обновление: " RESET "%s\n", now.last_update);
+
+    printf("\n" F_WHITE "--- ПАМЯТЬ ПРОЦЕССА ---\n" RESET);
     print_memory_info();
+
+    printf("\n" F_WHITE "--- ЖЕЛЕЗО (RAM) ---\n" RESET);
     mem_info();
-    printf("Press 0 to exit");
+
+    printf("\n" F_BLUE "------------------------------------------\n");
+    printf(F_CYAN " [0]" RESET " Вернуться в главное меню\n");
+    printf(F_BLUE "------------------------------------------\n" RESET);
+
     while (1) {
         short v;
-        scanf("%hd", &v);
+        printf(F_WHITE " > " RESET);
+        if (scanf("%hd", &v) != 1) {
+            while(getchar() != '\n');
+            continue;
+        }
         if (v == 0) {
-            SLEEP(1);  // 10 секунд в миллисекундах
-
+            SLEEP(1);
             CLEAR;
             starts();
+            break;
         }
     }
-
 }

@@ -12,9 +12,7 @@
 void execute_choice(int choice) {
     switch(choice) {
         case 1:
-            printf("Работа над файлом (функция пока не реализована)\n");
-            printf("\nНажмите Enter для продолжения...");
-            getchar();
+            menu_file();
             break;
         case 2:
             actions();
@@ -54,37 +52,40 @@ void execute_choice(int choice) {
 }
 
 
-int starts(void) {
+int starts(void)
+{
     int choice;
 
-    while(1) {
+    while (1)
+    {
         CLEAR;
-        printf("\n========== ГЛАВНОЕ МЕНЮ ==========\n");
+        printf(F_WHITE "Главное меню" F_CYAN RESET "\n");
+        printf(F_BLUE "------------------------------------------" RESET "\n");
         const char *vibor[] = {
-            "1. Работа над файлом.\n",
-            "2. Математика.\n",
-            "3. Время сейчас.\n",
-            "4. Погода.\n",
-            "5. Help\n",
-            "6. Заметка\n",
-            "7. Все файлы в директории\n",
-            "8. Информация о Системе\n",
-            "0. Выход\n",
-        };
+            "Работа над файлом", "Математика", "Время сейчас", "Погода",
+            "Справка (Help)", "Заметка", "Все файлы", "Инфо о системе"};
 
-        for (int i = 0; i < ARRAYSIZE(vibor); i++) {
-            printf("%s", vibor[i]);
+        for (int i = 0; i < ARRAYSIZE(vibor); i++)
+        {
+            // [ 1 ] - Текст пункта
+            printf(F_BLUE "[" F_WHITE "%d" F_BLUE "]" RESET " %s\n", i + 1, vibor[i]);
         }
-        printf("=================================\n");
+        printf(F_BLUE "------------------------------------------" RESET "\n");
+        printf(F_WHITE "0." RESET " Выход\n\n");
+        printf(F_BOLD "nolerr@user" RESET ":" F_BLUE "~" RESET "$ "); // Имитация строки ввода bash
 
-        printf("Введите число от (1-8): ");
-        scanf("%d", &choice);
-        while(getchar() != '\n'); // Очистка буфера
+        if (scanf("%d", &choice) != 1)
+        {
+            while (getchar() != '\n');
+            continue;
+        }
+        while (getchar() != '\n');
 
+        if (choice == 0)exit(0);
 
-        if(choice < 1 || choice > 8) {
-            printf("Ошибка! Введите число от 1 до 8 (или 1 для выхода).\n");
-            printf("Нажмите Enter для продолжения...");
+        if (choice < 1 || choice > 8)
+        {
+            printf(F_BLUE "[" F_WHITE "!" F_BLUE "]" RESET " Ошибка: Выберите 1-8\n");
             getchar();
             continue;
         }
@@ -92,6 +93,8 @@ int starts(void) {
         execute_choice(choice);
     }
 }
+
+
 
 int main(void)
 {
