@@ -16,6 +16,7 @@
 #define CLEAR system("cls");
 #define ACCESS(x) (_access(x, 0) == 0)
 #define F_OK 0
+#include <psapi.h>
 
 #else
 #include <unistd.h>

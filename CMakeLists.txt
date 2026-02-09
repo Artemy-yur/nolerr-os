@@ -13,6 +13,7 @@ add_executable(Ezy_OS
         additions/help/help.c
         additions/infos.c
         additions/notich.c
+        main.c
 )
 
 target_include_directories(Ezy_OS PRIVATE libraru)

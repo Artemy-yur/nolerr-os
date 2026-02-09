@@ -6,9 +6,9 @@
  * Лицензия MIT: свободное использование с сохранением авторства
  */
 
-#include "../libraru/initlibery.h"
-#include "../clearwin.h"
-#include "../INIT.h"
+#include "libraru/initlibery.h"
+#include "clearwin.h"
+#include "INIT.h"
 #include <sys/stat.h>
 
 static void read_notich(void);

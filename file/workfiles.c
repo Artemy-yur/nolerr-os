@@ -2,7 +2,7 @@
  * Nolerr-OS - Copyright (c) 2025 Артемий Юров
  * Лицензия MIT: свободное использование с сохранением авторства
  */
-#include <conio.h>
+
 #include "../clearwin.h"
 #include "../libraru/initlibery.h"
 #include <dirent.h>
@@ -103,7 +103,7 @@ void readfile(const char *name) {
 
     printf("Press 0 to exit: ");
 
-    while (TRUE) {
+    while (true) {
         scanf("%hd", &v);
         while (getchar() != '\n');
         if (v == 0) {
@@ -212,7 +212,7 @@ void copyfile(const char *from, const char *to) {
 
     printf("Press 0 to exit: ");
 
-    while (TRUE) {
+    while (true) {
         scanf("%hd", &v);
         while (getchar() != '\n');
         if (v == 0) {
@@ -243,7 +243,7 @@ void listfile(void) {
 
     printf("Press 0 to exit: ");
 
-    while (TRUE) {
+    while (true) {
         scanf("%hd", &v);
         while (getchar() != '\n');
         if (v == 0) {

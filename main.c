@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include "INIT.h"
 #include "clearwin.h"
+#include "libraru/brbr.h"
 
 void execute_choice(int choice)
 {
@@ -21,16 +22,22 @@ void execute_choice(int choice)
     case 3:
         times();
         break;
-    case 4:
-    {
-        char city[50];
-        printf("Введите город: ");
-        scanf("%49s", city);
-        while (getchar() != '\n')
-            ; // Очистка буфера
-        get_weather_win(city);
-    }
-    break;
+        case 4:
+        {
+#ifdef _WIN32
+            char city[50];
+            printf("Введите город: ");
+            scanf("%49s", city);
+            while (getchar() != '\n')
+                ; // Очистка буфера
+            get_weather_win(city);
+#else
+            printf("В linux системе пока не работает!");
+            getchar();
+            break;
+#endif
+            break;
+        }
     case 5:
         python_help();
         break;
@@ -71,7 +78,7 @@ int starts(void)
             "Работа над файлом", "Математика", "Время сейчас", "Погода",
             "Справка (Help)", "Заметка", "Все файлы", "Инфо о системе"};
 
-        for (int i = 0; i < ARRAYSIZE(vibor); i++)
+        for (int i = 0; i < LEN_ARR(vibor); i++)
         {
             // [ 1 ] - Текст пункта
             printf(F_BLUE "[" F_WHITE "%d" F_BLUE "]" RESET " %s\n", i + 1, vibor[i]);

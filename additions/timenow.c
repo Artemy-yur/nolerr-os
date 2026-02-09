@@ -40,8 +40,6 @@ int _getch(void)
 }
 #endif
 
-// Предварительное объявление функции starts (должна быть определена в другом месте)
-void starts(void);
 
 void times(void)
 {
