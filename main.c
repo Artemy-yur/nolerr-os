@@ -42,7 +42,13 @@ void execute_choice(int choice)
         listfile();
         break;
     case 8:
+#ifdef _WIN32
         info_system();
+#else
+        printf("В linux системе пока не работает!");
+        getchar();
+        break;
+#endif
         break;
     default:
         printf("Неизвестное действие!\n");
