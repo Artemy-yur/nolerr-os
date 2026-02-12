@@ -16,7 +16,7 @@
 ```batch
 git clone https://github.com/Artemy-yur/nolerr-OS.git
 cd nolerr-OS
-bild.bat
+build.bat
 Затем запустите Ezy_OS.exe.
 
 Для Linux
