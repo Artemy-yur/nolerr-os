@@ -3,7 +3,7 @@
  * Лицензия MIT: свободное использование с сохранением авторства
  */
 #include "../../libraru/initlibery.h"
-
+#include "../../clearwin.h"
 
 void python_help(void) {
     // Используем system(), чтобы запустить скрипт и дождаться его завершения
@@ -12,6 +12,8 @@ void python_help(void) {
     if (status == -1) {
         perror("Ошибка запуска help.py");
     } else {
+
         printf("Возврат в основную программу.\n");
+
     }
 }

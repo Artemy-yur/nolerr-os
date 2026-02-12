@@ -10,7 +10,7 @@ PROGRAM = Ezy_OS
 # Все исходники
 SRCS = main.c \
        file/workfiles.c \
-       additions/calculator.c \
+       additions/calculator/calculator.c \
        additions/timenow.c \
        additions/wearth/getWearth.c \
        interface/interface.c \
@@ -26,7 +26,7 @@ all: $(PROGRAM)
 
 # Сборка программы (без ws2_32 для macOS/Linux)
 $(PROGRAM): $(OBJS)
-	$(CC) $(OBJS) -o $(PROGRAM)
+	$(CC) $(OBJS) -o $(PROGRAM) -lm
 
 # Правило для сборки .o файлов
 %.o: %.c

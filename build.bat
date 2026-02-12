@@ -1,37 +1,31 @@
 @echo off
 echo Building Ezy_OS project with GCC...
 
-REM Список всех исходных файлов C в проекте
 set SRCS=main.c^
  file/workfiles.c^
- additions/calculator.c^
+ additions/calculator/calculator.c^
  additions/timenow.c^
  additions/wearth/getWearth.c^
  interface/interface.c^
  additions/help/help.c^
  additions/infos.c^
- additions/notich/notich.c
+ additions/notich/notich.c^
+ language/locale_managere.c
 
-REM Добавляем пути для заголовочных файлов
 set INCLUDES=-I. -Ilibraru
 
-REM Команда компиляции с флагами
 echo Compiling with GCC...
 gcc %SRCS% %INCLUDES% -o Ezy_OS.exe -lws2_32 -Wall -Wextra -g
 
-REM Проверка на успешное завершение команды (errorlevel 0)
 if %ERRORLEVEL% equ 0 (
     echo.
+    REM ИСПРАВЛЕНО: копируем скрипт из папки additions/help в корень к .exe
+    copy /Y "additions\help\help.py" "help.py" >nul
+
     echo --- Build successful! ---
     echo Executable created: Ezy_OS.exe
-    
-    
-    echo.
-    echo To run: Ezy_OS.exe
 ) else (
     echo.
     echo --- Build FAILED! ---
-    echo Check for compilation errors above.
 )
-
 pause

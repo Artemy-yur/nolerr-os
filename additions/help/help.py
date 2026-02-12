@@ -1,39 +1,35 @@
-import sys
-
-commands = ['gh', 'file', 'additions', 'wearth', 'timenow', 'exit', 'help', 'clear']
-
-def print_help():
-    print("Доступные команды / Available commands:")
-    print("  gh        - Домой / Go home")
-    print("  file      - Файлы / File operations")
-    print("  additions - Меню / Additions menu")
-    print("  wearth    - Погода / Weather")
-    print("  timenow   - Время / Current time")
-    print("  exit      - Выход / Exit")
-    print("  help      - Справка / Help")
-    print("  clear     - Очистка / Clear screen")
-    print(" list       - Все файлы / File")
+def show_function_help():
+    """Полная справка по всем функциям программы"""
+    help_text = """
+╔══════════════════════════════════════════════════════════════╗
+║                     СПРАВКА ПО ФУНКЦИЯМ                     ║
+╚══════════════════════════════════════════════════════════════╝
+ 1. listfile()     - Просмотр файлов (список, размеры)
+ 2. workfile()     - Управление (создание, удаление, copy, move)
+ 3. actions()      - Математика (+, -, *, /, ^, √, sin, cos, log)
+ 4. times()        - Дата и время (ЧЧ:ММ:СС, ДД.ММ.ГГГГ)
+ 5. get_weather_win() - Погода (температура в городе)
+╚══════════════════════════════════════════════════════════════╝
+"""
+    print(help_text)
 
 def main():
-    print_help()
+    # Список существующих функций для проверки
+    commands = ['listfile', 'workfile', 'actions', 'times', 'get_weather_win']
+
+    show_function_help()
+
     while True:
         try:
-            command = input("\nВведите команду (help/exit): ").strip().lower()
+            command = input("\nЧтобы выйти напишите (exit): ").strip().lower()
             if command == 'exit':
                 print("Выход из справки...")
                 break
-            elif command == 'help':
-                print_help()
-            elif command in commands:
-                print(f"Команда '{command}' не реализована в help.py пока что.")
             else:
                 print(f"Неизвестная команда: '{command}'")
-        except EOFError:
+        except (EOFError, KeyboardInterrupt):
+            print("\nПрограмма завершена.")
             break
-        except KeyboardInterrupt:
-            break
-
 
 if __name__ == "__main__":
     main()
-

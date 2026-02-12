@@ -4,12 +4,11 @@
  */
 
 
-#include "../libraru/initlibery.h"
+#include "../../libraru/initlibery.h"
+#include "../../clearwin.h"
+#include "exitfunc.h"
 
-#include "../clearwin.h"
-#include "../INIT.h"
 
-static void math_actions(void);
 
 void actions(void) {
     short v;
@@ -59,13 +58,14 @@ static void sqtr(void) {
 
     if (number < 0) {
         printf("Ошибка: нельзя извлечь корень из отрицательного числа!\n");
-        SLEEP(10);
-        return;
+        exit_f();
     }
 
     result = sqrt(number);
     printf("√%.2lf = %.4lf\n", number, result);
-    SLEEP(10);
+    printf("Press 0 to exit: ");
+
+    exit_f();
 }
 
 static void power(void) {
@@ -76,15 +76,13 @@ static void power(void) {
     if (scanf("%lf %lf", &base, &exponent) != 2) {
         printf("Неверный ввод!\n");
         while(getchar() != '\n');
-        SLEEP(10);
-        return;
+        exit_f();
     }
 
     
     if (base == 0 && exponent <= 0) {
         printf("0^0 или 0^(отрицательное) не определено!\n");
-        SLEEP(10);
-        return;
+        exit_f();
     }
 
     if (base < 0 && fmod(exponent, 1.0) != 0.0) {
@@ -105,7 +103,7 @@ static void power(void) {
     } else {
         printf("%.6lf\n", result);
     }
-    SLEEP(10);
+    exit_f();
 }
 
 
@@ -129,15 +127,15 @@ static void math_actions(void) {
     switch (action) {
         case '+':
             printf("%d\n", num1 + num2);
-            SLEEP(10);
+            exit_f();
             break;
         case '-':
             printf("%d\n", num1 - num2);
-            SLEEP(10);
+            exit_f();
             break;
         case '*':
             printf("%d\n", num1 * num2);
-            SLEEP(10);
+            exit_f();
             break;
         case '/':
             if (num2 != 0) {
@@ -148,7 +146,7 @@ static void math_actions(void) {
             } else {
                 printf("Error: Division by zero!\n");
             }
-            SLEEP(10);
+            exit_f();
             break;
         default:
             printf("Error: Invalid operation!\n");

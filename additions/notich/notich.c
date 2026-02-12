@@ -6,17 +6,20 @@
  * Лицензия MIT: свободное использование с сохранением авторства
  */
 
-#include "libraru/initlibery.h"
-#include "clearwin.h"
-#include "INIT.h"
+#include "./initlibery.h"
 #include <sys/stat.h>
+#include "../clearwin.h"
 
+
+int starts(void);
 static void read_notich(void);
 static void write_notich(void);
 
 
 void notich(void)
 {
+
+
     const char *filename = "notich.txt";
 
     // Проверка и создание файла

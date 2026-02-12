@@ -10,4 +10,11 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdbool.h>
+#include <locale.h>
 
+
+#ifdef __WIN32__
+#include <io.h>
+#include <windows.h>
+#endif
+#define LEN_ARR(arr) sizeof(arr) / sizeof(*arr)

@@ -7,10 +7,15 @@
 #include "../libraru/initlibery.h"
 #include <dirent.h>
 #include "../INIT.h"
+#include "workfile.h"
 
+#define MAX_CHOICE 6
+#define MIN_CHOICE 1
 
+#define NAME_LEN 20
 
 void menu_file(void) {
+
     printf("1. Создать файл\n2. Прочитать содержимое\n3. Внести текст в файл\n4. Удалить файл\n5. Копировать файл\n6. Выход в меню\n");
 
     short v;
@@ -23,7 +28,7 @@ void menu_file(void) {
             continue;
         }
 
-        if(v > 6 || v < 1) {
+        if(v > MAX_CHOICE || v < MIN_CHOICE) {
             printf(F_CYAN "  [!] Число должно быть от 1 до 6" RESET "\n");
         }
         else {
@@ -33,33 +38,33 @@ void menu_file(void) {
 
     switch (v) {
         case 1: {
-            char name[20];
+            char name[NAME_LEN];
             printf("Enter your namefile: ");
             scanf("%s", name);
             creatfile(name);
             break;
         }
         case 2: {
-            char name[20];
+            char name[NAME_LEN];
             printf("Enter your namefile: ");
             scanf("%s", name);
             readfile(name);
             break;
         }
         case 3: {
-            char name[20];
+            char name[NAME_LEN];
             printf("Enter your namefile: ");
             scanf("%s", name);
             writefile(name);
         }
         case 4: {
-            char name[20];
+            char name[NAME_LEN];
             printf("Enter your namefile: ");
             scanf("%s", name);
             deletefile(name);
         }
         case 5: {
-            char name1[20], name2[20];
+            char name1[NAME_LEN], name2[NAME_LEN];
             printf("Enter your namefile 1 and file 2: ");
             scanf("%s %s", name1,name2);
             copyfile(name1, name2);

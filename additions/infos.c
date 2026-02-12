@@ -7,7 +7,7 @@
 #include <../clearwin.h>
 #include <../INIT.h>
 
-int starts(void);
+
 static void mem_info(void) {
     MEMORYSTATUSEX memInfo;
     memInfo.dwLength = sizeof(MEMORYSTATUSEX);
@@ -39,6 +39,8 @@ typedef struct {
 
 void info_system(void) {
     CLEAR;
+    //russian_locale();
+
     date now = {"03.02.2026", "Version 0.3"};
 
     printf(F_BLUE "       \n");
