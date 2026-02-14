@@ -8,6 +8,25 @@
 #include <../INIT.h>
 
 
+static void cpu_info(void) {
+    SYSTEM_INFO si;
+    GetSystemInfo(&si);
+
+    printf("Процессоров: %u\n",si.dwNumberOfProcessors);
+    printf("Тип процессора: %u\n",si.dwProcessorType);
+    printf("Архетектура: %u\n",si.wProcessorArchitecture);
+
+    switch (si.wProcessorArchitecture) {
+        case PROCESSOR_ARCHITECTURE_INTEL:
+            printf("x86\n"); break;
+        case PROCESSOR_ARCHITECTURE_ARM:
+            printf("ARM\n"); break;
+        case PROCESSOR_ARCHITECTURE_AMD64:
+            printf("AMD64\n"); break;
+        default: printf("unknown\n"); break;
+    }
+
+}
 static void mem_info(void) {
     MEMORYSTATUSEX memInfo;
     memInfo.dwLength = sizeof(MEMORYSTATUSEX);
@@ -41,7 +60,7 @@ void info_system(void) {
     CLEAR;
     //russian_locale();
 
-    date now = {"03.02.2026", "Version 0.3"};
+    date now = {"14.02.2026", "Version 0.4"};
 
     printf(F_BLUE "       \n");
     printf(F_BLUE "       " F_WHITE "Nolerr-OS " F_BLUE "\n");
@@ -54,6 +73,9 @@ void info_system(void) {
 
     printf("\n" F_WHITE "--- ПАМЯТЬ ПРОЦЕССА ---\n" RESET);
     print_memory_info();
+
+    printf("\n" F_WHITE "--- Информация о процессоре (CPU) ---\n" RESET);
+    cpu_info();
 
     printf("\n" F_WHITE "--- ЖЕЛЕЗО (RAM) ---\n" RESET);
     mem_info();

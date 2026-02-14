@@ -9,6 +9,8 @@
 #ifdef _WIN32
 #include <conio.h>
 #include <windows.h>
+
+
 #else
 #include <unistd.h>
 #include <termios.h>
@@ -43,6 +45,7 @@ int _getch(void)
 
 void times(void)
 {
+
     printf("Нажмите любую клавишу, чтобы выйти в меню...\n");
 
     while (1)
